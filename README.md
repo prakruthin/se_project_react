@@ -36,7 +36,6 @@ WTWR fetches current weather data and suggests clothing items accordingly. You c
 - Delete existing items
 - Toggle temperature units (°C / °F)
 - User auth (sign‑up, login/logout, protected profile routes)
-- Responsive design & modals for item preview and add form
 
 ---
 
