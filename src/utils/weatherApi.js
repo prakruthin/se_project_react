@@ -1,4 +1,4 @@
-const procesServerResponse = (res) => {
+const processServerResponse = (res) => {
   if (res.ok) {
     return res.json();
   } else {
@@ -9,7 +9,7 @@ const procesServerResponse = (res) => {
 export const getWeather = ({ latitude, longitude }, APIKey) => {
   return fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIKey}`
-  ).then(procesServerResponse);
+  ).then(processServerResponse);
 };
 
 export const filterWeatherData = (data) => {
