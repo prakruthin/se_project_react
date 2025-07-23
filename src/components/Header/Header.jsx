@@ -3,7 +3,6 @@ import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
 
 function Header({ handleAddClick, weatherData }) {
-  // debugger;
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",

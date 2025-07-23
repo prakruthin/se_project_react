@@ -1,5 +1,4 @@
 import "./Main.css";
-// import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
