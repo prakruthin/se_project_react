@@ -1,0 +1,19 @@
+.sidebar {
+  display: flex;
+  gap: 16px;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+}
+
+.sidebar__username {
+  margin: 0;
+  padding: 15px 0;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+}
