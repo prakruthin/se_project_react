@@ -1,8 +1,17 @@
-.cards__list {
+/* .cards__list {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   padding: 0px;
   margin: 0;
   list-style-type: none;
+} */
+
+.cards__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 325px);
+  gap: 20px;
 }

@@ -12,6 +12,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants";
 import Profile from "../Profile/Profile.jsx";
 import { getItems, addItem, deleteItem } from "../../utils/api.js";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -26,16 +27,16 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
-  // const [itemToDelete, setItemToDelete] = useState(null);
+  const [itemToDelete, setItemToDelete] = useState(null);
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
-  // const handleDeleteClick = (card) => {
-  //   setItemToDelete(card);
-  //   setActiveModal("confirm-delete");
-  // };
+  const handleDeleteClick = (item) => {
+    setItemToDelete(item);
+    setActiveModal("confirm-delete");
+  };
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -43,12 +44,20 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
-    // setItemToDelete(null);
+    setItemToDelete(null);
   };
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleConfirmDelete = () => {
+    const id = itemToDelete?._id;
+    if (id) {
+      handleItemDelete(id);
+    }
+    closeActiveModal();
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
@@ -68,6 +77,7 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item.id !== id)
         );
+        console.log("Succusfully deleted item:", id);
       })
       .catch((err) => {
         console.error("Failed to delete item:", err);
@@ -116,6 +126,7 @@ function App() {
                 <Profile
                   onCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  onAddClick={handleAddClick}
                 />
               }
             />
@@ -134,7 +145,13 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
-          onItemDelete={handleItemDelete}
+          onDeleteClick={handleDeleteClick}
+        />
+        <ConfirmDeleteModal
+          // activeModal={activeModal}
+          onClose={closeActiveModal}
+          isOpen={activeModal === "confirm-delete"}
+          onConfirmDelete={handleConfirmDelete}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

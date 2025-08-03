@@ -23,7 +23,6 @@ function addItem({ name, imageUrl, weather }) {
 }
 
 function deleteItem(id) {
-  console.log(`${baseUrl}/items/:${id}`);
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {

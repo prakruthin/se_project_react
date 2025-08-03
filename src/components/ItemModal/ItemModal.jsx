@@ -2,7 +2,7 @@ import "./ItemModal.css";
 import closeWhite from "../../assets/closeWhite.svg";
 // import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
-function ItemModal({ activeModal, card, onClose, onItemDelete }) {
+function ItemModal({ activeModal, card, onClose, onDeleteClick }) {
   return (
     <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
       <div className="modal__content modal__content_type_image">
@@ -11,14 +11,14 @@ function ItemModal({ activeModal, card, onClose, onItemDelete }) {
         </button>
         <img src={card.imageUrl} alt={card.name} className="modal__image" />
         <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather">Weather: {card.weather}</p>
+          <div>
+            <h2 className="modal__caption">{card.name}</h2>
+            <p className="modal__weather">Weather: {card.weather}</p>
+          </div>
           <button
             type="button"
             className="modal__delete-btn"
-            onClick={() => {
-              card?._id && onItemDelete(card._id);
-            }}
+            onClick={() => onDeleteClick(card)}
           >
             Delete item
           </button>

@@ -1,6 +1,7 @@
 .page {
   background-color: #f3f3f3;
   font-family: Cabinet, sans-serif;
+  max-width: 1440;
 }
 
 .page__content {
