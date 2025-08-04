@@ -64,7 +64,7 @@ function App() {
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     addItem({ name, imageUrl, weather })
       .then((newItem) => {
-        setClothingItems((prevItems) => [...prevItems, newItem]);
+        setClothingItems((prevItems) => [newItem, ...prevItems]);
         closeActiveModal();
       })
       .catch((err) => {
@@ -76,7 +76,7 @@ function App() {
     deleteItem(id)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item.id !== id)
+          prevItems.filter((item) => item._id !== id)
         );
         console.log("Succusfully deleted item:", id);
       })
