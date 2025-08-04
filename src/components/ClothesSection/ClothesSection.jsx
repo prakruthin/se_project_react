@@ -1,5 +1,4 @@
 import "./ClothesSection.css";
-// import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 
 function ClothesSection({ onCardClick, clothingItems, onAddClick }) {
@@ -10,7 +9,6 @@ function ClothesSection({ onCardClick, clothingItems, onAddClick }) {
         <button
           type="button"
           className="clothes-section__add-new-btn"
-          // onClick={handleAddClick}
           onClick={onAddClick}
         >
           + Add New
