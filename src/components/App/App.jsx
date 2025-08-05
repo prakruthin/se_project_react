@@ -15,11 +15,7 @@ import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.jsx";
 
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import { getItems, addItem, deleteItem } from "../../utils/api.js";
-import {
-  coordinates,
-  APIKey,
-  defaultClothingItems,
-} from "../../utils/constants";
+import { coordinates, APIKey } from "../../utils/constants";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -30,7 +26,7 @@ function App() {
     isDay: false,
   });
 
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -106,9 +102,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getItems().then((data) => {
-      setClothingItems(data);
-    });
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch clothing items", err);
+      });
   }, []);
 
   return (
