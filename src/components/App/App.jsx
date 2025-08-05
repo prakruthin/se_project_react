@@ -1,5 +1,8 @@
+//External library imports
 import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+
+//Internal component imports
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -9,10 +12,14 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal.jsx";
+
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import { coordinates, APIKey } from "../../utils/constants";
-import { defaultClothingItems } from "../../utils/constants";
 import { getItems, addItem, deleteItem } from "../../utils/api.js";
+import {
+  coordinates,
+  APIKey,
+  defaultClothingItems,
+} from "../../utils/constants";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -78,7 +85,6 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
         );
-        console.log("Succusfully deleted item:", id);
       })
       .catch((err) => {
         console.error("Failed to delete item:", err);
@@ -141,7 +147,6 @@ function App() {
           <Footer />
         </div>
         <AddItemModal
-          activeModal={activeModal}
           onClose={closeActiveModal}
           isOpen={activeModal === "add-garment"}
           onAddItemModalSubmit={handleAddItemModalSubmit}
@@ -153,7 +158,6 @@ function App() {
           onDeleteClick={handleDeleteClick}
         />
         <ConfirmDeleteModal
-          // activeModal={activeModal}
           onClose={closeActiveModal}
           isOpen={activeModal === "confirm-delete"}
           onConfirmDelete={handleConfirmDelete}

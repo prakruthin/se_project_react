@@ -1,15 +1,9 @@
-const processServerResponse = (res) => {
-  if (res.ok) {
-    return res.json();
-  } else {
-    return Promise.reject(`Error: ${res.status}`);
-  }
-};
+import { checkResponse } from "./api";
 
 export const getWeather = ({ latitude, longitude }, APIKey) => {
   return fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIKey}`
-  ).then(processServerResponse);
+  ).then(checkResponse);
 };
 
 export const filterWeatherData = (data) => {
