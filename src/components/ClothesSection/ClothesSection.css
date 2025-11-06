@@ -1,19 +1,27 @@
+.clothes-section {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  flex: 1;
+}
+
 .clothes-section__header {
   display: flex;
   gap: 20px;
 }
 
 .clothes-section__items {
+  display: flex;
+  flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: grid;
-  /* grid-template-columns: repeat(3, 325px); */
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, 325px);
-  max-width: 1015px;
+  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
+  max-width: 100%;
   width: 100%;
   box-sizing: border-box;
+  justify-content: flex-start;
 }
 
 .clothes-section__text {

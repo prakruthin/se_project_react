@@ -1,4 +1,17 @@
 .profile {
   display: flex;
-  justify-content: space-between;
+  gap: 80px;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.profile__sidebar {
+  /* flex: 0 0 250px; fixed width sidebar */
+  width: 250px;
+  flex-shrink: 0;
+  /* background-color: red; */
 }

@@ -5,7 +5,6 @@ import { useContext } from "react";
 
 function WeatherCard({ weatherData, isWeatherDataLoaded }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-
   const filteredOptions = weatherOptions.filter((option) => {
     return (
       option.day === weatherData.isDay &&
