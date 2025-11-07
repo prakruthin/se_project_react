@@ -95,7 +95,6 @@ function App() {
     deleteItem(id, token)
       .then(() => {
         setClothingItems((prevItems) =>
-          // prevItems.data.filter((item) => item._id !== id)
           prevItems.filter((item) => item._id !== id)
         );
       })
@@ -123,8 +122,7 @@ function App() {
     const token = getToken();
     addItem({ name, imageUrl, weather }, token)
       .then((newItem) => {
-        setClothingItems((prevItems) => [newItem.data, ...prevItems]);
-        console.log(clothingItems);
+        setClothingItems((prevItems) => [...prevItems, newItem.data]);
         closeActiveModal();
       })
       .catch((err) => {
@@ -137,7 +135,7 @@ function App() {
       .then((newuser) => {
         console.log(newuser);
         closeActiveModal();
-        navigate("/login");
+        setActiveModal("login-form");
       })
       .catch((err) => {
         console.error("Error adding new item:", err);
@@ -151,7 +149,6 @@ function App() {
     }
     authorize({ email, password })
       .then((data) => {
-        console.log(data);
         if (data.token) {
           setToken(data.token);
           setIsLoggedIn(true);
@@ -167,7 +164,6 @@ function App() {
     const token = getToken();
     editProfile({ name, avatar }, token)
       .then((user) => {
-        console.log(user);
         setCurrentUser(user.data);
         closeActiveModal();
       })

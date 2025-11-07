@@ -3,10 +3,6 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useState, useEffect } from "react";
 
 function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
-  //   const [email, setEmail] = useState("");
-  //   const [password, setPassword] = useState("");
-  //   const [name, setName] = useState("");
-  //   const [avatar, setAvatar] = useState("");
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -22,29 +18,6 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
     }));
   };
 
-  //   const handleEmailChange = (e) => {
-  //     setEmail(e.target.value);
-  //   };
-
-  //   const handlePasswordChange = (e) => {
-  //     setPassword(e.target.value);
-  //   };
-
-  //   const handleNameChange = (e) => {
-  //     setName(e.target.value);
-  //   };
-
-  //   const handleAvatarChange = (e) => {
-  //     setAvatar(e.target.value);
-  //   };
-
-  //   useEffect(() => {
-  //     setEmail("");
-  //     setPassword("");
-  //     setName("");
-  //     setAvatar("");
-  //   }, [isOpen]);
-
   useEffect(() => {
     if (isOpen) {
       setData({
@@ -58,13 +31,13 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // onRegisterModalSubmit({ email, password, name, avatar });
     onRegisterModalSubmit(data);
   };
 
   return (
     <ModalWithForm
       buttonText="Next"
+      text="or Log in"
       title="Sign up"
       onClose={onClose}
       isOpen={isOpen}

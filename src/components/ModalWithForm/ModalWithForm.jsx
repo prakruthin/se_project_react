@@ -4,6 +4,7 @@ import closeDark from "../../assets/closeDark.svg";
 function ModalWithForm({
   children,
   buttonText,
+  text,
   title,
   onClose,
   isOpen,
@@ -17,10 +18,13 @@ function ModalWithForm({
           <img src={closeDark} alt="Close" className="modal__close-icon" />
         </button>
         <form onSubmit={onSubmit} className="modal__form">
-          {children}
-          <button type="submit" className="modal__submit">
-            {buttonText}
-          </button>
+          <div className="modal__form-container">{children}</div>
+          <div className="modal__button-container">
+            <button type="submit" className="modal__submit">
+              {buttonText}
+            </button>
+            {text && <span className="modal__text">{text}</span>}
+          </div>
         </form>
       </div>
     </div>

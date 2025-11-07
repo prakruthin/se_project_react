@@ -8,7 +8,6 @@ export function checkResponse(res) {
 }
 
 function register({ email, password, name, avatar }) {
-  console.log(email, password, name, avatar);
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {

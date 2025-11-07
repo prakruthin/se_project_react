@@ -11,6 +11,13 @@ https://prakruthin.github.io/se_project_react/
 
 ---
 
+## 🧠 Backend Repository
+
+The backend for this project is available here:  
+👉 [WTWR Backend (Express API)](https://github.com/prakruthin/se_project_express)
+
+---
+
 ## 📋 Overview
 
 WTWR fetches current weather data and suggests clothing items accordingly. You can browse, add, and manage your wardrobe items—all tailored to the forecast!

@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
+// import { validateEmail } from "../../utils/validation";
 import "./LoginModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
 
 function LoginModal({ onClose, isOpen, onLoginModalSubmit }) {
   const [data, setData] = useState({
@@ -33,7 +34,7 @@ function LoginModal({ onClose, isOpen, onLoginModalSubmit }) {
   return (
     <ModalWithForm
       buttonText="Log in"
-      //   text="or Register"
+      text="or Register"
       title="Log in"
       onClose={onClose}
       isOpen={isOpen}

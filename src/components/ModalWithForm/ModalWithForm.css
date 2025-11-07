@@ -51,9 +51,14 @@
 .modal__form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
+.modal__form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .modal__input {
   display: block;
   font-size: 16px;
@@ -95,7 +100,10 @@
 .modal__label_type_radio input[type="radio"]:checked + span {
   color: #000;
 }
-
+.modal__button-container {
+  display: flex;
+  gap: 12px;
+}
 .modal__submit {
   background-color: #000;
   color: #fff;
@@ -103,12 +111,19 @@
   border-radius: 4px;
   padding: 8px 16px;
   max-width: 124px;
-  margin: 8px 0 0;
+  /* margin: 8px 0 0; */
   opacity: 1;
   transition: opacity 0.5s;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .modal__submit:hover {
   opacity: 0.6;
+}
+
+.modal__text {
+  color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  align-self: center;
 }

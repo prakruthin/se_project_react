@@ -40,13 +40,13 @@ function EditProfileModal({ onClose, isOpen, onEditProfileModalSubmit }) {
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="editName" className="modal__label">
         Name{" "}
         <input
           type="text"
           name="name"
           className="modal__input"
-          id="name"
+          id="editName"
           placeholder="Name"
           //set name dynamically
           required
@@ -54,13 +54,13 @@ function EditProfileModal({ onClose, isOpen, onEditProfileModalSubmit }) {
           value={data.name}
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label htmlFor="editAvatar" className="modal__label">
         Avatar{" "}
         <input
           type="url"
           name="avatar"
           className="modal__input"
-          id="avatar"
+          id="editAvatar"
           placeholder="Avatar url"
           required
           onChange={handleChange}
