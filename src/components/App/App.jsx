@@ -32,7 +32,7 @@ import {
   getUserData,
   editProfile,
 } from "../../utils/auth.js";
-import { coordinates, APIKey } from "../../utils/constants";
+import { coordinates, apiKey } from "../../utils/constants";
 import { getToken, setToken, removeToken } from "../../utils/token.js";
 
 function App() {
@@ -132,10 +132,21 @@ function App() {
 
   const handleRegisterModalSubmit = ({ email, password, name, avatar }) => {
     register({ email, password, name, avatar })
-      .then((newuser) => {
-        console.log(newuser);
+      .then(() => {
+        return authorize({ email, password });
+      })
+      .then((data) => {
+        if (data.token) {
+          setToken(data.token);
+          setIsLoggedIn(true);
+          return getUserData(data.token);
+        } else {
+          throw new Error("Failed to receive a token");
+        }
+      })
+      .then((user) => {
+        setCurrentUser(user);
         closeActiveModal();
-        setActiveModal("login-form");
       })
       .catch((err) => {
         console.error("Error adding new item:", err);
@@ -153,6 +164,7 @@ function App() {
           setToken(data.token);
           setIsLoggedIn(true);
           closeActiveModal();
+          navigate("/");
         }
       })
       .catch((err) => {
@@ -194,7 +206,7 @@ function App() {
   };
 
   useEffect(() => {
-    getWeather(coordinates, APIKey)
+    getWeather(coordinates, apiKey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
@@ -217,7 +229,6 @@ function App() {
       });
   }, []);
 
-  //  Auto login
   useEffect(() => {
     const token = getToken();
     if (!token) {
@@ -227,8 +238,6 @@ function App() {
       .then((user) => {
         setIsLoggedIn(true);
         setCurrentUser(user.data);
-        // setIsLoggedIn(false);
-        // setCurrentUser({});
       })
       .catch((err) => {
         console.error("Error fetching user data", err);

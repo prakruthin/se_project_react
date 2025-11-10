@@ -1,11 +1,6 @@
-const baseUrl = "http://localhost:3001";
-
-export function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-}
+// const baseUrl = "http://localhost:3001";
+const baseUrl = "https://se-project-express-l7e7.onrender.com";
+import { checkResponse } from "./api.js";
 
 function register({ email, password, name, avatar }) {
   return fetch(`${baseUrl}/signup`, {
