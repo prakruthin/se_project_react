@@ -1,43 +1,31 @@
 {
-  "name": "se_project_express ",
-  "version": "0.1.0",
-  "description": "The back-end project is focused on creating a server for the WTWR application. You’ll gain a deeper understanding of how to work with databases, set up security and testing, and deploy web applications on a remote machine. The eventual goal is to create a server with an API and user authorization. ## Running the Project `npm run start` — to launch the server",
-  "homepage": "https://github.com/prakruthin/se_project_express#readme",
-  "bugs": {
-    "url": "https://github.com/prakruthin/se_project_express/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/prakruthin/se_project_express.git"
-  },
-  "license": "ISC",
-  "author": "Prakruthi Nagaraj",
-  "type": "commonjs",
-  "main": "app.js",
+  "name": "se_project_react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "homepage": "https://YOUR_ USERNAME.github.io/se_project_react/",
   "scripts": {
-    "lint": "npx eslint .",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "vite --open",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
-    "express": "^4.21.2",
-    "helmet": "^8.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^6.6.1",
-    "validator": "^13.15.15"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.30.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.4",
-    "@babel/eslint-parser": "^7.28.4",
-    "@types/jsonwebtoken": "^9.0.10",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-prettier": "^8.10.2",
-    "eslint-plugin-import": "^2.32.0",
-    "nodemon": "^3.1.10",
-    "prettier": "^2.8.8"
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
+    "gh-pages": "^6.3.0",
+    "vite": "^5.3.1"
   }
 }
