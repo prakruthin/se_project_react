@@ -52,6 +52,10 @@ WTWR fetches current weather data and suggests clothing items accordingly. You c
 
 ![Main Page](./screenshots/main-page.png)
 
+### Profile Page
+
+![Main Page](./screenshots/profile-page.png)
+
 ### Add Garment Modal
 
 ![Add Item Modal](./screenshots/add-garment-modal.png)
@@ -59,3 +63,7 @@ WTWR fetches current weather data and suggests clothing items accordingly. You c
 ### Item Modal
 
 ![Add Item Modal](./screenshots/item-modal.png)
+
+### Signup Modal
+
+![Add Item Modal](./screenshots/signup-modal.png)
