@@ -122,8 +122,12 @@
   opacity: 0.6;
 }
 
-.modal__text {
+.modal__secondary-btn {
+  padding: 0;
+  border: none;
+  font-weight: 700;
+  line-height: 1.25;
+  background: transparent;
   color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  align-self: center;
 }

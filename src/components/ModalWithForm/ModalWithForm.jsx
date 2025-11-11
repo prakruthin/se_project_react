@@ -4,11 +4,12 @@ import closeDark from "../../assets/closeDark.svg";
 function ModalWithForm({
   children,
   buttonText,
-  text,
+  switchText,
   title,
   onClose,
   isOpen,
   onSubmit,
+  onSwitchForm,
 }) {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -23,7 +24,13 @@ function ModalWithForm({
             <button type="submit" className="modal__submit">
               {buttonText}
             </button>
-            {text && <span className="modal__text">{text}</span>}
+            <button
+              type="button"
+              className="modal__secondary-btn"
+              onClick={onSwitchForm}
+            >
+              {switchText}
+            </button>
           </div>
         </form>
       </div>

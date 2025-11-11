@@ -1,44 +1,33 @@
-import { useState, useEffect } from "react";
-// import { validateEmail } from "../../utils/validation";
-import "./LoginModal.css";
+import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({ onClose, isOpen, onLoginModalSubmit }) {
-  const [data, setData] = useState({
+function LoginModal({
+  onClose,
+  isOpen,
+  onLoginModalSubmit,
+  onSwitchForm,
+  isLoading,
+}) {
+  const defaultValues = {
     email: "",
     password: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
-
-  useEffect(() => {
-    if (isOpen) {
-      setData({
-        email: "",
-        password: "",
-      });
-    }
-  }, [isOpen]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onLoginModalSubmit(data);
-  };
+  const { values, setValues, handleChange } = useForm(defaultValues);
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onLoginModalSubmit(values);
+    setValues(defaultValues);
+  }
 
   return (
     <ModalWithForm
-      buttonText="Log in"
-      text="or Register"
+      buttonText={isLoading ? "Logging in..." : "Log in"}
+      switchText="or Register"
       title="Log in"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      onSwitchForm={onSwitchForm}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}
@@ -50,7 +39,7 @@ function LoginModal({ onClose, isOpen, onLoginModalSubmit }) {
           placeholder="Email"
           required
           onChange={handleChange}
-          value={data.email}
+          value={values.email}
         />
       </label>
       <label htmlFor="password" className="modal__label">
@@ -63,7 +52,7 @@ function LoginModal({ onClose, isOpen, onLoginModalSubmit }) {
           placeholder="Password"
           required
           onChange={handleChange}
-          value={data.password}
+          value={values.password}
         />
       </label>
     </ModalWithForm>

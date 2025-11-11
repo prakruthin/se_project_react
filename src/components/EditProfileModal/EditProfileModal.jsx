@@ -3,7 +3,12 @@ import "./EditProfileModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function EditProfileModal({ onClose, isOpen, onEditProfileModalSubmit }) {
+function EditProfileModal({
+  onClose,
+  isOpen,
+  onEditProfileModalSubmit,
+  isLoading,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const [data, setData] = useState({
     name: "",
@@ -34,7 +39,7 @@ function EditProfileModal({ onClose, isOpen, onEditProfileModalSubmit }) {
 
   return (
     <ModalWithForm
-      buttonText="Save changes"
+      buttonText={isLoading ? "Saving..." : "Save changes"}
       title="Change profile data"
       onClose={onClose}
       isOpen={isOpen}
@@ -48,7 +53,6 @@ function EditProfileModal({ onClose, isOpen, onEditProfileModalSubmit }) {
           className="modal__input"
           id="editName"
           placeholder="Name"
-          //set name dynamically
           required
           onChange={handleChange}
           value={data.name}

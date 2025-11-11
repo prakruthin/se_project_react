@@ -31,6 +31,8 @@ function Main({
               .filter((item) => {
                 return item.weather === weatherData.type;
               })
+              .slice()
+              .reverse()
               .map((item) => {
                 return (
                   <ItemCard

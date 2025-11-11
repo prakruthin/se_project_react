@@ -24,19 +24,23 @@ function ClothesSection({
         </button>
       </div>
       <ul className="clothes-section__items">
-        {clothingItems.map((item) => {
-          const isOwn = item.owner === currentUser._id;
-          return (
-            isOwn && (
-              <ItemCard
-                key={item._id}
-                item={item}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-              />
-            )
-          );
-        })}
+        {/* {clothingItems.map((item) => { */}
+        {clothingItems
+          .slice()
+          .reverse()
+          .map((item) => {
+            const isOwn = item.owner === currentUser._id;
+            return (
+              isOwn && (
+                <ItemCard
+                  key={item._id}
+                  item={item}
+                  onCardClick={onCardClick}
+                  onCardLike={onCardLike}
+                />
+              )
+            );
+          })}
       </ul>
     </div>
   );

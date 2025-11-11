@@ -52,6 +52,7 @@ function App() {
   const [isWeatherDataLoaded, setIsWeatherDataLoaded] = useState(false);
   const [currentUser, setCurrentUser] = useState({ username: "", email: "" });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -97,6 +98,7 @@ function App() {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
         );
+        closeActiveModal();
       })
       .catch((err) => {
         console.error("Failed to delete item:", err);
@@ -115,42 +117,47 @@ function App() {
     if (id) {
       handleItemDelete(id);
     }
-    closeActiveModal();
   };
+
+  function handleSubmit(request) {
+    setIsLoading(true);
+    request()
+      .then(() => closeActiveModal())
+      .catch((err) => console.error("Error:", err))
+      .finally(() => setIsLoading(false));
+  }
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
     const token = getToken();
-    addItem({ name, imageUrl, weather }, token)
-      .then((newItem) => {
+    function makeRequest() {
+      return addItem({ name, imageUrl, weather }, token).then((newItem) => {
         setClothingItems((prevItems) => [...prevItems, newItem.data]);
-        closeActiveModal();
-      })
-      .catch((err) => {
-        console.error("Error adding new item:", err);
       });
+    }
+
+    handleSubmit(makeRequest);
   };
 
   const handleRegisterModalSubmit = ({ email, password, name, avatar }) => {
-    register({ email, password, name, avatar })
-      .then(() => {
-        return authorize({ email, password });
-      })
-      .then((data) => {
-        if (data.token) {
-          setToken(data.token);
-          setIsLoggedIn(true);
-          return getUserData(data.token);
-        } else {
-          throw new Error("Failed to receive a token");
-        }
-      })
-      .then((user) => {
-        setCurrentUser(user);
-        closeActiveModal();
-      })
-      .catch((err) => {
-        console.error("Error adding new item:", err);
-      });
+    function makeRequest() {
+      return register({ email, password, name, avatar })
+        .then(() => {
+          return authorize({ email, password });
+        })
+        .then((data) => {
+          if (data.token) {
+            setToken(data.token);
+            setIsLoggedIn(true);
+            return getUserData(data.token);
+          } else {
+            throw new Error("Failed to receive a token");
+          }
+        })
+        .then((user) => {
+          setCurrentUser(user);
+        });
+    }
+    handleSubmit(makeRequest);
   };
 
   const handleLoginModalSubmit = ({ email, password }) => {
@@ -158,30 +165,26 @@ function App() {
       console.log("Missing value");
       return;
     }
-    authorize({ email, password })
-      .then((data) => {
+    function makeRequest() {
+      return authorize({ email, password }).then((data) => {
         if (data.token) {
           setToken(data.token);
           setIsLoggedIn(true);
-          closeActiveModal();
           navigate("/");
         }
-      })
-      .catch((err) => {
-        console.error("Error adding new item:", err);
       });
+    }
+    handleSubmit(makeRequest);
   };
 
   const handleEditProfileModalSubmit = ({ name, avatar }) => {
     const token = getToken();
-    editProfile({ name, avatar }, token)
-      .then((user) => {
+    function makeRequest() {
+      return editProfile({ name, avatar }, token).then((user) => {
         setCurrentUser(user.data);
-        closeActiveModal();
-      })
-      .catch((err) => {
-        console.error("Error adding new item:", err);
       });
+    }
+    handleSubmit(makeRequest);
   };
 
   const handleCardLike = ({ id, isLiked }) => {
@@ -195,14 +198,18 @@ function App() {
               )
             );
           })
-          .catch((err) => console.log(err))
+          .catch((err) => {
+            console.error(err);
+          })
       : removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard.data : item))
             );
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.error(err);
+          });
   };
 
   useEffect(() => {
@@ -243,6 +250,22 @@ function App() {
         console.error("Error fetching user data", err);
       });
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -296,6 +319,7 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "add-garment"}
             onAddItemModalSubmit={handleAddItemModalSubmit}
+            isLoading={isLoading}
           />
           <ItemModal
             activeModal={activeModal}
@@ -312,16 +336,21 @@ function App() {
             onClose={closeActiveModal}
             isOpen={activeModal === "register-form"}
             onRegisterModalSubmit={handleRegisterModalSubmit}
+            onSwitchForm={handleLogin}
+            isLoading={isLoading}
           />
           <LoginModal
             onClose={closeActiveModal}
             isOpen={activeModal === "login-form"}
             onLoginModalSubmit={handleLoginModalSubmit}
+            onSwitchForm={handleSignup}
+            isLoading={isLoading}
           />
           <EditProfileModal
             onClose={closeActiveModal}
             isOpen={activeModal === "edit-form"}
             onEditProfileModalSubmit={handleEditProfileModalSubmit}
+            isLoading={isLoading}
           />
         </div>
       </CurrentUserContext.Provider>

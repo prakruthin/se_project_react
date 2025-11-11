@@ -1,47 +1,35 @@
-import "./RegisterModal.css";
+import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState, useEffect } from "react";
 
-function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
-  const [data, setData] = useState({
+function RegisterModal({
+  onClose,
+  isOpen,
+  onRegisterModalSubmit,
+  onSwitchForm,
+  isLoading,
+}) {
+  const defaultValues = {
     email: "",
     password: "",
     name: "",
     avatar: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
   };
-
-  useEffect(() => {
-    if (isOpen) {
-      setData({
-        email: "",
-        password: "",
-        name: "",
-        avatar: "",
-      });
-    }
-  }, [isOpen]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onRegisterModalSubmit(data);
-  };
+  const { values, setValues, handleChange } = useForm(defaultValues);
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onRegisterModalSubmit(values);
+    setValues(defaultValues);
+  }
 
   return (
     <ModalWithForm
-      buttonText="Next"
-      text="or Log in"
+      buttonText={isLoading ? "Saving..." : "Next"}
+      switchText="or Log in"
       title="Sign up"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      onSwitchForm={onSwitchForm}
     >
       <label htmlFor="loginEmail" className="modal__label">
         Email{" "}
@@ -53,7 +41,7 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
           placeholder="Email"
           required
           onChange={handleChange}
-          value={data.email}
+          value={values.email}
         />
       </label>
       <label htmlFor="loginPassword" className="modal__label">
@@ -66,7 +54,7 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
           placeholder="Password"
           required
           onChange={handleChange}
-          value={data.password}
+          value={values.password}
         />
       </label>
       <label htmlFor="userName" className="modal__label">
@@ -79,7 +67,7 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
           placeholder="Name"
           required
           onChange={handleChange}
-          value={data.name}
+          value={values.name}
         />
       </label>
       <label htmlFor="avatar" className="modal__label">
@@ -92,7 +80,7 @@ function RegisterModal({ onClose, isOpen, onRegisterModalSubmit }) {
           placeholder="Avatar URL"
           required
           onChange={handleChange}
-          value={data.avatar}
+          value={values.avatar}
         />
       </label>
     </ModalWithForm>
