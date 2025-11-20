@@ -7,7 +7,7 @@ A React + Vite weather-based clothing recommendations app.
 ## 🌐 Live Demo
 
 Check it out here:  
-https://prakruthin.github.io/se_project_react/
+https://gcp-wtwr.jumpingcrab.com/
 
 ---
 

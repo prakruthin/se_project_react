@@ -1,5 +1,4 @@
-// const baseUrl = "http://localhost:3001";
-const baseUrl = "https://se-project-express-l7e7.onrender.com";
+import { baseUrl } from "./constants";
 
 export function checkResponse(res) {
   if (res.ok) {

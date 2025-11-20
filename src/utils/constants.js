@@ -121,3 +121,8 @@ export const coordinates = {
 };
 
 export const apiKey = "bca5cf00391f33ca034c29d7713a386d";
+
+export const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.gcp-wtwr.jumpingcrab.com"
+    : "http://localhost:3001";
